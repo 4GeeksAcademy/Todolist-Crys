@@ -1,15 +1,38 @@
 import React, { useState } from "react";
 import Button from "./Button";
 
-//Input con funcion 
-
-export default function Input() {
+export default function Input({ onAdd }) {
   const [valor, setValor] = useState("");
 
+  // Función para agregar tarea y limpiar input
+  const handleAdd = () => {
+    if (valor.trim() !== "") {
+      onAdd(valor);
+      setValor("");
+    }
+  };
+
+  // Maneja Enter
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && valor.trim() !== "") {
+      onAdd(valor);
+      setValor("");
+    }
+  };
+
   return (
-    <div>
-      <input onChange={(e) => setValor(e.target.value)} />
-      <Button texto="Agregar." onClick={() => console.log(valor)} />
+    <div className="contenedor-input">
+      <input
+        type="text"
+        placeholder="Escribe aquí tu tarea"
+        value={valor}
+        onChange={(e) => setValor(e.target.value)}
+        onKeyDown={handleKeyDown}
+      />
+      <Button onClick={handleAdd}>
+  Agregar
+</Button>
+
     </div>
   );
 }

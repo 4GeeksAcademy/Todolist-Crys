@@ -1,20 +1,93 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-import Titulo from "./Titulo";
+import Header from "./Header";
 import Input from "./Input";
-import Button from "./Button";
+import TaskList from "./TaskList";
+import Footer from "./Footer";
 
-//create your first component
 const Home = () => {
-	return (
-		<div className="text-center">
 
-            <Titulo/>
-			<Input/>
-		
+  // --- 1. Estado del tema ---
+  const [tema, setTema] = useState("light");
 
-		</div>
-	);
+  const toggleTema = () => {
+    setTema(prev => (prev === "light" ? "dark" : "light"));
+  };
+
+  // Aplicar clase al body cuando cambia el tema
+  useEffect(() => {
+    document.body.className = "";
+    document.body.classList.add(tema);
+  }, [tema]);
+
+
+  // --- 2. Estado de tareas ---
+  const [tareas, setTareas] = useState([
+    { id: 1, texto: "Aprender React", completada: false },
+    { id: 2, texto: "Practicar JavaScript", completada: false },
+    { id: 3, texto: "Crear mi ToDo App", completada: false },
+  ]);
+
+
+  // --- 3. Función para agregar tarea ---
+  const agregarTarea = (texto) => {
+    const nueva = {
+      id: Date.now(),
+      texto: texto,
+      completada: false
+    };
+
+    setTareas([nueva, ...tareas]); // arriba primero
+  };
+
+
+  // --- 4. Función para borrar tarea ---
+  const borrarTarea = (id) => {
+    setTareas(tareas.filter(t => t.id !== id));
+  };
+
+
+  // --- 5. Función para marcar/desmarcar ---
+  const toggleTarea = (id) => {
+    setTareas(
+      tareas.map(t =>
+        t.id === id ? { ...t, completada: !t.completada } : t
+      )
+    );
+  };
+
+
+  return (
+    <div className="justify-content">
+
+        {/* Header */}
+        <Header tema={tema} toggleTema={toggleTema} />
+
+        {/* Contenedor principal */}
+        <div className="contenedor-principal">
+
+            {/* Sección del input */}
+            <div className="contenedor-input">
+                <Input onAdd={agregarTarea} />
+            </div>
+
+            {/* Sección de la lista de tareas */}
+            <div className="contenedor-lista">
+                <TaskList
+                    tareas={tareas}
+                    onDelete={borrarTarea}
+                    onToggle={toggleTarea}
+                />
+            </div>
+
+			{/* Sección de Footer */}
+            <div className="contenedor-footer">
+                <Footer/>
+            </div>
+
+        </div>
+    </div>
+);
 };
 
 export default Home;
