@@ -218,6 +218,7 @@ header button i.bi-moon-fill {
 .task-item:hover {
     transform: scale(1.02);
     box-shadow: 0 0 12px var(--border-color), 0 0 8px var(--primary-color);
+    filter: brightness(1.15);
 }
 
 /* Texto tachado si completada */

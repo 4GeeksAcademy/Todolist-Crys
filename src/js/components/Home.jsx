@@ -23,9 +23,10 @@ const Home = () => {
 
   // --- 2. Estado de tareas ---
   const [tareas, setTareas] = useState([
-    { id: 1, texto: "Aprender React", completada: false },
-    { id: 2, texto: "Practicar JavaScript", completada: false },
-    { id: 3, texto: "Crear mi ToDo App", completada: false },
+    { id: 1, texto: "Pasear al perro", completada: false },
+    { id: 2, texto: "Practicar logica JavaScript ", completada: false },
+    { id: 3, texto: "Comprar pan, leche y huevo", completada: false },
+    { id: 4, texto: "Tratar de conquistar el mundo", completada: false },
   ]);
 
 

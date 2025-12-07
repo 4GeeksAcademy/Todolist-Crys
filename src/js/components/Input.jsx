@@ -30,7 +30,7 @@ export default function Input({ onAdd }) {
         onKeyDown={handleKeyDown}
       />
       <Button onClick={handleAdd}>
-  Agregar
+  Agregar <i class="bi bi-file-earmark-plus"></i>
 </Button>
 
     </div>
