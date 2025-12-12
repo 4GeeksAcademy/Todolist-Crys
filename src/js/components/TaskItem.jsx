@@ -5,7 +5,7 @@ export default function TaskItem({ tarea, onDelete, onToggle }) {
   return (
     <div className={`task-item ${tarea.completada ? "completada" : ""}`}>
       
-      {/* Checkbox */}
+      {/* Checkbox, marca tarea completada */}
       <input
         type="checkbox"
         checked={tarea.completada}

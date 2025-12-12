@@ -7,30 +7,33 @@ import Footer from "./Footer";
 
 const Home = () => {
 
-  // --- 1. Estado del tema ---
+  // Estado del tema Dark -- Ligth
   const [tema, setTema] = useState("light");
 
   const toggleTema = () => {
     setTema(prev => (prev === "light" ? "dark" : "light"));
   };
 
-  // Aplicar clase al body cuando cambia el tema
+  // Aplicar clase al body cuando cambia el tema--useEffect garantiza el cambio limpio
+
   useEffect(() => {
     document.body.className = "";
     document.body.classList.add(tema);
   }, [tema]);
 
 
-  // --- 2. Estado de tareas ---
+  // estado de las tareas, useState con estado inicial de 4 tareas preparado para añadir mas
+
   const [tareas, setTareas] = useState([
-    { id: 1, texto: "Pasear al perro", completada: false },
+    { id: 1, texto: "Pasear el perro", completada: false },
     { id: 2, texto: "Practicar logica JavaScript ", completada: false },
-    { id: 3, texto: "Comprar pan, leche y huevo", completada: false },
+    { id: 3, texto: "Comprar pan, leche y huevos", completada: false },
     { id: 4, texto: "Tratar de conquistar el mundo", completada: false },
   ]);
 
 
-  // --- 3. Función para agregar tarea ---
+  // Funcion para agregar tareas 
+
   const agregarTarea = (texto) => {
     const nueva = {
       id: Date.now(),
@@ -38,17 +41,19 @@ const Home = () => {
       completada: false
     };
 
-    setTareas([nueva, ...tareas]); // arriba primero
+    setTareas([nueva, ...tareas]); //Asi se agrega la tarea nueva al inicio
   };
 
 
-  // --- 4. Función para borrar tarea ---
+  // Funcion para borrar tareas con filter, localiza el Id que conicide y se elimina 
+
   const borrarTarea = (id) => {
     setTareas(tareas.filter(t => t.id !== id));
   };
 
 
-  // --- 5. Función para marcar/desmarcar ---
+  // Una funcion extra para marcar como REALIZADA mi tarea
+
   const toggleTarea = (id) => {
     setTareas(
       tareas.map(t =>
@@ -62,12 +67,13 @@ const Home = () => {
     <div className="justify-content">
 
         {/* Header */}
+
         <Header tema={tema} toggleTema={toggleTema} />
 
         {/* Contenedor principal */}
         <div className="contenedor-principal">
 
-            {/* Sección del input */}
+            {/* Sección del input para agregar tareas nueva */}
             <div className="contenedor-input">
                 <Input onAdd={agregarTarea} />
             </div>

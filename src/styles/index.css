@@ -346,3 +346,8 @@ footer.footer code {
     border: 1px solid var(--border-color);
     box-shadow: 0 0 5px var(--border-color);
 }
+footer.footer a {
+    color: rgb(12, 103, 12); 
+    /* ... */
+}
+
